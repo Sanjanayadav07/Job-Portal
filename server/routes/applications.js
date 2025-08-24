@@ -31,6 +31,11 @@ router.get("/", requireAuth, async (req, res)  => {
   res.json(applications);
 });
 
+// ✅ GET single application by ID
+router.get("/:id", requireAuth, async (req, res) => {
+  const { id } = req.params;
+  res.json({ id, name: `App ${id}`, status: "pending" });
+});
 // POST /api/applications/apply => upload resume
 //router.post("/applications/apply", requireAuth, upload.single("resume"), (req, res) => {
  router.post("/apply", requireAuth, upload.single("resume"), (req, res) => { 
