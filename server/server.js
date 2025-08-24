@@ -36,7 +36,11 @@ await connectDB();
 // Middlewares
 //app.use(cors());
 app.use(cors({
-  origin: "http://localhost:5173", // match your current frontend origin
+    origin: [
+    "http://localhost:5173",
+    "https://job-portal-1-nq2z.onrender.com" // Production frontend
+  ],
+ // match your current frontend origin
   credentials: true,               // if you need cookies/auth
 }));
 
