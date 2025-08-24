@@ -18,7 +18,7 @@ import path from "path";
 
 import applicationRoutes from "./routes/applications.js";
 import JobApplication from "./models/JobApplication.js";
-
+import fs from "fs";
 import { protectCompany } from "./middlewares/authMiddleware.js";
 
 
@@ -47,6 +47,15 @@ app.use(cors({
 
 app.use(express.json());
 app.use(clerkMiddleware());
+// Debug middleware: logs incoming paths to identify issues
+app.use((req, res, next) => {
+  console.log("Incoming path:", req.path);
+  next();
+});
+
+// Ensure uploads folder exists
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 // Routes
 // Routes
@@ -91,16 +100,20 @@ app.get("/applications", protectCompany, async (req, res) => {
 app.post("/webhooks", clerkWebhooks);
 
 //API
+app.use("/api/jobs", jobRoutes);
 app.use('/api/company', companyRoutes);
-app.use('/api/jobs', jobRoutes);
+//app.use('/api/jobs', jobRoutes);
 app.use("/api/users", userRoutes);
 //app.use("/api", applicationRoutes);
 // ✅ sahi
 app.use("/api/applications", applicationRoutes);
 
+// Static uploads folder
+app.use("/uploads", express.static(uploadDir));
+
 //app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //app.use("/uploads", express.static(path.join(process.cwd(), "server/uploads")));
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+//app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
