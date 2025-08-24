@@ -1,35 +1,45 @@
-import React, { useContext } from 'react'
-import './index.css';
+import React, { useContext } from "react";
+import { Routes, Route } from "react-router-dom";
+import ApplyJob from "./pages/Applyjob";
+//import ApplyJob from "./pages/ApplyJob";
+import EditJob from "./pages/EditJob";
+import Home from "./pages/Home";
+import RecruiterLogin from "./components/RecruiterLogin";
+import { AppContext } from "./context/AppContext";
+import Dashboard from "./pages/Dashboard";
+import ViewApplications from "./pages/ViewApplications";
+import ManageJobs from "./pages/ManageJobs";
+import AddJob from "./pages/AddJob";
+import "quill/dist/quill.snow.css";
+import { ToastContainer } from "react-toastify";
 
-import { Route,Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import Applyjob from './pages/Applyjob'
-import Application from './pages/Application'
-import RecruiterLogin from './components/RecruiterLogin';
-import { AppContext } from './context/AppContext';
-import Dashboard from './pages/Dashboard';
-import AddJob from './pages/AddJob';
-import ManageJobs from './pages/ManageJobs';
-import ViewApplication from './pages/ViewApplication';
-import 'quill/dist/quill.snow.css';
+const App = () => {
+  const { showRecruiterLogin, companyToken } = useContext(AppContext);
 
-
-export default function App() {
-
-  const {showRecruiterLogin}= useContext(AppContext)
   return (
     <div>
-      { showRecruiterLogin && <RecruiterLogin/>}
+      {showRecruiterLogin && <RecruiterLogin />}
+      <ToastContainer />
+     
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='/apply-job/:id' element={<Applyjob/>}/>
-        <Route path='/applications' element={<Application/>}/>
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/apply-job/:id" element={<ApplyJob />} />
+        <Route path="/applications" element={<ViewApplications />} />
+
+        <Route path="/dashboard" element={companyToken ? <Dashboard /> : <Home />}>
           <Route path="add-job" element={<AddJob />} />
-          <Route path="manage-jobs" element={<ManageJobs />} /> {/* ✅ singular match */}
-          <Route path="view-applications" element={<ViewApplication />} />
+          <Route path="manage-jobs" element={<ManageJobs />} />
+          <Route path="view-applications" element={<ViewApplications />} />
+           <Route path="*" element={<ManageJobs />} /> {/* Redirect unknown paths */}
+          <Route path="/dashboard/edit-job/:id" element={<EditJob />} />
         </Route>
       </Routes>
+      
+
     </div>
-  )
-}
+  );
+};
+
+export default App;
+

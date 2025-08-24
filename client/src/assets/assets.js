@@ -1,5 +1,7 @@
 import logo from "./logo.svg";
 import search_icon from "./search_icon.svg";
+import google from "../assets/google.png";
+
 import company_icon from "./company_icon.svg";
 import microsoft_logo from "./microsoft_logo.svg";
 import walmart_logo from "./walmart_logo.svg";
@@ -165,6 +167,8 @@ export const jobsData = [
             "name": "Slack",
             "email": "slack@demo.com",
             "image": company_icon,
+         
+
         },
         description: `
         <p>We are seeking a highly skilled Full Stack Developer to join our dynamic and innovative team. The ideal candidate will have a passion for developing scalable web applications and working across the entire technology stack, including front-end and back-end development. You will have the opportunity to work with the latest technologies and contribute to exciting projects that impact our users directly.</p>
@@ -228,9 +232,9 @@ export const jobsData = [
         level: "Beginner Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Amazon",
+            "email": "amazon@demo.com",
+            "image": assets.amazon_logo,
         },
         description: `
         <p>Create intuitive digital experiences as a UI/UX Designer. In this role, you will collaborate with product teams to design engaging user interfaces and ensure a seamless user journey. Your creativity and attention to detail will be crucial in developing designs that not only look good but also enhance functionality and user satisfaction.</p>
@@ -261,9 +265,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Microsoft",
+            "email": "microsoft@demo.com",
+            "image": assets.microsoft_logo,
         },
         description: `
         <p>Enhance our deployment pipeline as a DevOps Engineer. This role will involve automating deployment processes, managing cloud infrastructure, and implementing best practices for security and performance. You will play a vital role in bridging the gap between development and operations, ensuring efficient workflows and high-quality releases.</p>
@@ -294,9 +298,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Google",
+            "email": "google@demo.com",
+            "image": assets.google,
         },
         description: `
         <p>Join our team as a Software Engineer to build high-quality applications that deliver exceptional user experiences. You will be responsible for designing, developing, and maintaining software solutions that meet business needs. Collaborating closely with other engineers, you will contribute to code reviews and ensure best practices are followed throughout the development process.</p>
@@ -327,9 +331,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Adobe",
+            "email": "adobe@demo.com",
+            "image": assets.adobe_logo,
         },
         description: `
         <p>We are looking for a Network Engineer to manage our infrastructure and ensure robust connectivity across all systems. Your expertise will help us design and implement network solutions that are secure and efficient. You will be pivotal in monitoring network performance and ensuring compliance with security standards.</p>
@@ -360,9 +364,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Accenture",
+            "email": "accenture@demo.com",
+            "image": assets.accenture_logo,
         },
         description: `
         <p>Lead projects as a Project Manager ensuring timely delivery and alignment with organizational goals. You will oversee project planning, execution, and monitoring, collaborating with various teams to ensure that all aspects of each project are delivered successfully. Your strong leadership skills will be key to motivating team members and fostering a positive work environment.</p>
@@ -393,9 +397,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Walmart",
+            "email": "walmart@demo.com",
+            "image": assets.walmart_logo,
         },
         description: `
         <p>Join our team as a Mobile App Developer to create engaging mobile applications for iOS and Android platforms. You will be responsible for the full app development lifecycle, from concept and design to deployment and maintenance. Your creativity and technical skills will help us deliver high-quality applications that enhance user experience.</p>
@@ -459,9 +463,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Samsung",
+            "email": "samsung@demo.com",
+            "image": assets.samsung_logo,
         },
         description: `
         <p>Join us as a Technical Writer to create user-friendly documentation that supports our products and services. You will work closely with engineers and product managers to gather information and produce clear, concise, and accurate documentation. Your role is essential in ensuring that our users can easily understand and utilize our offerings.</p>
@@ -492,9 +496,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Google",
+            "email": "google@demo.com",
+            "image": assets.google,
         },
         description: `
         <p>Protect our systems as a Cybersecurity Analyst. In this role, you will monitor security systems, analyze potential threats, and implement protective measures to safeguard our information and assets. Your expertise will help us stay ahead of evolving security challenges and maintain a secure environment for our users and stakeholders.</p>
@@ -525,9 +529,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "adobe",
+            "email": "adobe@demo.com",
+            "image": assets.adobe_logo,
         },
         description: `
         <p>Join us as a Business Analyst to optimize our processes and improve overall efficiency. You will work closely with stakeholders to identify business needs and gather requirements for new projects. Your analytical skills will help drive decision-making and ensure that solutions align with business objectives.</p>
@@ -591,9 +595,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Google",
+            "email": "google@demo.com",
+            "image": assets.google,
         },
         description: `
         <p>Join our innovative team as a Data Scientist, where you will analyze complex data sets to drive strategic decision-making. You will leverage your statistical and programming skills to uncover insights and develop predictive models, contributing to the overall success of our organization.</p>
@@ -653,13 +657,13 @@ export const jobsData = [
     {
         _id: '16',
         title: "DevOps Engineer",
-        location: "Bangalore",
+        location: "Banglore",
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Adobe",
+            "email": "adobe@demo.com",
+            "image": assets.adobe_logo,
         },
         description: `
         <p>As a DevOps Engineer, you will play a crucial role in enhancing our software development and deployment processes. You will work with development and operations teams to automate workflows, improve system reliability, and ensure seamless integration and delivery of applications.</p>
@@ -723,9 +727,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Amazon",
+            "email": "amazon@demo.com",
+            "image": assets.amazon_logo,
         },
         description: `
         <p>As a Human Resources Specialist, you will support various HR functions, including recruitment, employee relations, and compliance. You will play a vital role in fostering a positive workplace culture and ensuring that our HR practices align with organizational goals.</p>
@@ -756,9 +760,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Accenture",
+            "email": "accenture@demo.com",
+            "image": assets.accenture_logo,
         },
         description: `
         <p>We are looking for a Content Marketing Manager to lead our content strategy and execution. In this role, you will develop compelling content that engages our audience and drives brand awareness. You will collaborate with various teams to ensure consistent messaging across all platforms.</p>
@@ -789,9 +793,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Walmart",
+            "email": "walmart@demo.com",
+            "image": assets.walmart_logo,
         },
         description: `
         <p>Join our creative team as a Graphic Designer, where you will be responsible for creating visually appealing graphics and layouts that enhance our brand identity. You will collaborate with marketing and product teams to develop creative solutions for various projects.</p>
@@ -818,13 +822,13 @@ export const jobsData = [
     {
         _id: '21',
         title: "Software Tester",
-        location: "Chennai",
+        location: "New York",
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Walmart",
+            "email": "walmart@demo.com",
+            "image": assets.walmart_logo,
         },
         description: `
         <p>As a Software Tester, you will play a critical role in ensuring the quality and reliability of our software applications. You will design test cases, execute tests, and collaborate with development teams to identify and resolve defects before product release.</p>
@@ -855,9 +859,9 @@ export const jobsData = [
         level: "Senior Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Microsoft",
+            "email": "microsoft@demo.com",
+            "image": assets.microsoft_logo,
         },
         description: `
         <p>We are seeking a Network Security Engineer to protect our organization's IT infrastructure. You will design and implement security measures to safeguard systems from unauthorized access and ensure compliance with security policies.</p>
@@ -888,9 +892,9 @@ export const jobsData = [
         level: "Intermediate Level",
         companyId: {
             "_id": "670e4d25ca9fda8f1bf359b9",
-            "name": "Slack",
-            "email": "slack@demo.com",
-            "image": company_icon,
+            "name": "Amazon",
+            "email": "amazon@demo.com",
+            "image": assets.amazon_logo,
         },
         description: `
         <p>Join our technology team as a Cloud Engineer, where you will be responsible for designing and managing our cloud infrastructure. You will collaborate with development and operations teams to ensure the efficient deployment and scaling of applications.</p>
@@ -913,5 +917,75 @@ export const jobsData = [
         salary: 102000,
         date: 1729681667114,
         category: "Programming",
-    }
+    },
+
+    {
+    _id: '24',
+    title: "Frontend Developer",
+    location: "Bangalore",
+    level: "Intermediate",
+    companyId: {
+        _id: "670e4d25ca9fda8f1bf359c1",
+        name: "Accenture",
+        email: "accenture@demo.com",
+        image: assets.accenture_logo,
+    },
+    description: `
+        <p>We are seeking a skilled Frontend Developer to build engaging and responsive web applications. You will collaborate with designers and backend developers to deliver seamless user experiences while ensuring high performance and scalability.</p>
+        <h2><strong>Key Responsibilities</strong></h2>
+        <ol>
+            <li>Develop responsive web interfaces using modern frameworks and libraries.</li>
+            <li>Collaborate with UX/UI designers to translate wireframes into functional components.</li>
+            <li>Optimize applications for maximum speed and scalability.</li>
+            <li>Ensure cross-browser and cross-platform compatibility.</li>
+            <li>Maintain code quality through reviews, testing, and best practices.</li>
+        </ol>
+        <h2><strong>Skills Required</strong></h2>
+        <ol>
+            <li>Proficiency in HTML, CSS, and JavaScript (ES6+).</li>
+            <li>Experience with frameworks like React.js, Angular, or Vue.js.</li>
+            <li>Strong understanding of responsive and adaptive design principles.</li>
+            <li>Familiarity with RESTful APIs and Git version control.</li>
+            <li>Good problem-solving skills and attention to detail.</li>
+        </ol>`,
+    salary: 85000,
+    date: 1729682000114,
+    category: "Programing",
+},
+
+{
+    _id: '25',
+    title: "Backend Developer",
+    location: "Chenni",
+    level: "Intermediate",
+    companyId: {
+        _id: "670e4d25ca9fda8f1bf359b9",
+        name: "Accenture",
+        email: "accenture@demo.com",
+        image: assets.accenture_logo,
+    },
+    description: `
+        <p>We are looking for a talented Backend Developer to design, build, and maintain efficient and scalable server-side applications. You will work closely with frontend developers, product managers, and QA teams to ensure smooth integration and robust performance of our systems.</p>
+        <h2><strong>Key Responsibilities</strong></h2>
+        <ol>
+            <li>Develop and maintain backend services, APIs, and databases.</li>
+            <li>Collaborate with frontend teams to integrate user-facing elements with server-side logic.</li>
+            <li>Ensure application performance, security, and scalability.</li>
+            <li>Troubleshoot, debug, and upgrade existing systems.</li>
+            <li>Write clean, maintainable, and testable code.</li>
+        </ol>
+        <h2><strong>Skills Required</strong></h2>
+        <ol>
+            <li>Proficiency in Java, Python, or Node.js for backend development.</li>
+            <li>Strong understanding of relational and NoSQL databases (MySQL, PostgreSQL, MongoDB).</li>
+            <li>Experience with RESTful APIs and microservices architecture.</li>
+            <li>Knowledge of cloud platforms such as AWS, Azure, or GCP.</li>
+            <li>Excellent problem-solving and communication skills.</li>
+        </ol>`,
+    salary: 95000,
+    date: 1729685600114,
+    category: "Programing",
+}
+
+
 ];
