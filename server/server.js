@@ -87,30 +87,29 @@ app.get("/applications", protectCompany, async (req, res) => {
   }
 });
 
+
+app.post("/webhooks", clerkWebhooks);
+
+//API
+app.use('/api/company', companyRoutes);
+app.use('/api/jobs', jobRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api", applicationRoutes);
+
+//app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "server/uploads")));
+
 // ✅ React build serve karna (production only)
 if (process.env.NODE_ENV === "production") {
-  
-
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
 
   app.use(express.static(path.join(__dirname, "client/dist")));
 
-  app.get("*", (req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
   });
 }
-
-
-
-app.post("/webhooks", clerkWebhooks);
-app.use('/api/company', companyRoutes);
-app.use('/api/jobs', jobRoutes);
-app.use("/api/users", userRoutes);
-
-//app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/uploads", express.static(path.join(process.cwd(), "server/uploads")));
-
 
 // Port Set up
 const PORT = process.env.PORT || 5000;
