@@ -12,7 +12,7 @@ import connectCloudinary from "./config/cloudinary.js";
 import jobRoutes from "./routes/jobRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import {clerkMiddleware} from "@clerk/express"
-
+import { fileURLToPath } from "url";
 import path from "path";
 
 import applicationRoutes from "./routes/applications.js";
@@ -81,6 +81,21 @@ app.get("/applications", protectCompany, async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 });
+
+// ✅ React build serve karna (production only)
+if (process.env.NODE_ENV === "production") {
+  
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  app.use(express.static(path.join(__dirname, "client/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+  });
+}
+
 
 
 app.post("/webhooks", clerkWebhooks);
