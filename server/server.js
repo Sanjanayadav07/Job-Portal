@@ -95,6 +95,7 @@ app.use('/api/company', companyRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use("/api/users", userRoutes);
 //app.use("/api", applicationRoutes);
+// ✅ sahi
 app.use("/api/applications", applicationRoutes);
 
 //app.use("/uploads", express.static(path.join(__dirname, "uploads")));
