@@ -1,4 +1,4 @@
-
+/*
 import express from "express";
 import multer from "multer";
 import path from "path";
@@ -113,3 +113,49 @@ router.post("/apply", requireAuth, upload.single("resume"), (req, res) => {
 
 export default router;
 */
+
+
+import express from "express";
+import multer from "multer";
+import path from "path";
+
+const router = express.Router();
+
+// Multer storage setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage });
+
+// Dummy auth
+const requireAuth = (req, res, next) => next();
+
+// GET all applications
+router.get("/", requireAuth, async (req, res) => {
+  const applications = [
+    { id: 1, name: "App 1", status: "pending" },
+    { id: 2, name: "App 2", status: "approved" },
+  ];
+  res.json(applications);
+});
+
+// GET single application by ID
+router.get("/:id", requireAuth, async (req, res) => {
+  const { id } = req.params;
+  res.json({ id, name: `App ${id}`, status: "pending" });
+});
+
+// POST apply (upload resume)
+router.post("/apply", requireAuth, upload.single("resume"), (req, res) => {
+  const file = req.file;
+  if (!file) return res.status(400).json({ message: "No file uploaded" });
+  console.log("Resume uploaded:", file.filename);
+  res.json({ message: "Resume uploaded successfully", fileName: file.filename });
+});
+
+export default router;
