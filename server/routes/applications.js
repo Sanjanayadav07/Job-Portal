@@ -22,7 +22,8 @@ const upload = multer({ storage });
 const requireAuth = (req, res, next) => { next(); };
 
 // GET all applications (dummy)
-router.get("/applications", requireAuth, async (req, res) => {
+//router.get("/applications", requireAuth, async (req, res) => {
+router.get("/", requireAuth, async (req, res)  => {
   const applications = [
     { id: 1, name: "App 1", status: "pending" },
     { id: 2, name: "App 2", status: "approved" },
@@ -31,7 +32,8 @@ router.get("/applications", requireAuth, async (req, res) => {
 });
 
 // POST /api/applications/apply => upload resume
-router.post("/applications/apply", requireAuth, upload.single("resume"), (req, res) => {
+//router.post("/applications/apply", requireAuth, upload.single("resume"), (req, res) => {
+ router.post("/apply", requireAuth, upload.single("resume"), (req, res) => { 
   try {
     const file = req.file;
     if (!file) return res.status(400).json({ message: "No file uploaded" });
