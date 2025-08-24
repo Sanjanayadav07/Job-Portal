@@ -100,20 +100,19 @@ app.use("/api/applications", applicationRoutes);
 
 //app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //app.use("/uploads", express.static(path.join(process.cwd(), "server/uploads")));
-app.use("/uploads", express.static(path.join(process.cwd(), "server/uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// ✅ React build serve karna (production only)
+const reactBuildPath = path.resolve(__dirname, "../client/dist"); // Adjust this path
+
 if (process.env.NODE_ENV === "production") {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
+  app.use(express.static(reactBuildPath));
 
-  app.use(express.static(path.join(__dirname, "client/dist")));
-
-  app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-});
-
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(reactBuildPath, "index.html"));
+  });
 }
 
 // Port Set up
