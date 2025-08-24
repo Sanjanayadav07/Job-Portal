@@ -131,5 +131,3 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-
-app.use("/api", applicationRoutes);
