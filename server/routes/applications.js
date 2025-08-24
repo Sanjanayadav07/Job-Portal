@@ -1,4 +1,4 @@
-/*
+
 import express from "express";
 import multer from "multer";
 import path from "path";
@@ -48,8 +48,7 @@ router.post("/applications/apply", requireAuth, upload.single("resume"), (req, r
 
 export default router;
 
-*/
-
+/*
 import express from "express";
 import multer from "multer";
 import path from "path";
@@ -106,3 +105,4 @@ router.post("/apply", requireAuth, upload.single("resume"), (req, res) => {
 });
 
 export default router;
+*/
