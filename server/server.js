@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-
+import serverless from "serverless-http";
 import "./config/instrument.js";
 import express from "express";
 import cors from "cors";
@@ -39,7 +39,7 @@ await connectDB();
 app.use(cors({
     origin: [
     "http://localhost:5173",
-    "https://job-portal-1-nq2z.onrender.com" // Production frontend
+      "https://job-portal-xwm2.vercel.app" // your frontend production
   ],
  // match your current frontend origin
   credentials: true,               // if you need cookies/auth
