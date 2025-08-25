@@ -1,4 +1,4 @@
-
+/*
 import mongoose from "mongoose";
 import serverless from "serverless-http";
 import "./config/instrument.js";
@@ -23,7 +23,7 @@ import { protectCompany } from "./middlewares/authMiddleware.js";
 
 
 
-
+export const handler = serverless(app);
 // Initialize the app
 const app = express();
 
@@ -55,6 +55,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// Sentry (after app exists)
+Sentry.setupExpressErrorHandler(app);
 
 // Ensure uploads folder exists
 const uploadDir = path.join(process.cwd(), "uploads");
@@ -155,4 +157,110 @@ process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception:", err);
   process.exit(1);
 });
+*/
+
+import mongoose from "mongoose";
+import serverless from "serverless-http";
+import "./config/instrument.js";
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import connectDB from "./config/db.js";
+import * as Sentry from "@sentry/node";
+import { clerkWebhooks } from "./controllers/webhooks.js";
+import companyRoutes from "./routes/companyRoutes.js";
+import connectCloudinary from "./config/cloudinary.js";
+import jobRoutes from "./routes/jobRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import { clerkMiddleware } from "@clerk/express";
+import { fileURLToPath } from "url";
+import path from "path";
+import applicationRoutes from "./routes/applications.js";
+import JobApplication from "./models/JobApplication.js";
+import fs from "fs";
+import { protectCompany } from "./middlewares/authMiddleware.js";
+
+// 1️⃣ Initialize Express app first
+const app = express();
+
+// 2️⃣ Connect DB and Cloudinary
+await connectDB();
+await connectCloudinary();
+
+// 3️⃣ Middlewares
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://job-portal-xwm2.vercel.app"
+  ],
+  credentials: true
+}));
+app.use(express.json());
+app.use(clerkMiddleware());
+
+// Debug middleware
+app.use((req, res, next) => {
+  console.log("Incoming path:", req.originalUrl);
+  next();
+});
+
+// Sentry (after app exists)
+Sentry.setupExpressErrorHandler(app);
+
+// Ensure uploads folder exists
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+app.use("/uploads", express.static(uploadDir));
+
+// 4️⃣ Routes
+app.get("/", (req, res) => res.send("API is working"));
+app.get("/debug-sentry", () => { throw new Error("My First Sentry Error"); });
+
+app.get("/applications", protectCompany, async (req, res) => {
+  try {
+    const existing = await JobApplication.find({ companyId: req.company._id });
+    if (existing.length === 0) {
+      await JobApplication.create({
+        userId: mongoose.Types.ObjectId("USER_ID_HERE"),
+        companyId: req.company._id,
+        jobId: mongoose.Types.ObjectId("JOB_ID_HERE"),
+        status: "pending",
+        date: Date.now(),
+      });
+    }
+    const applications = await JobApplication.find({ companyId: req.company._id });
+    res.json({ success: true, applications });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+app.post("/webhooks", clerkWebhooks);
+
+// API routes
+app.use("/api/jobs", jobRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/company", companyRoutes);
+app.use("/api/applications", applicationRoutes);
+
+// Serve frontend in production
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const reactBuildPath = path.resolve(__dirname, "../client/dist");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(reactBuildPath));
+  app.get("*", (req, res) => res.sendFile(path.join(reactBuildPath, "index.html")));
+}
+
+// Example API test
+app.get('/api/path', (req, res) => res.json({ message: "Hello world" }));
+
+// 5️⃣ Export as serverless handler
+export const handler = serverless(app);
+
+// Handle unhandled promise rejections and exceptions
+process.on("unhandledRejection", (err) => console.error("Unhandled Rejection:", err));
+process.on("uncaughtException", (err) => console.error("Uncaught Exception:", err));
+
 
