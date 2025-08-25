@@ -177,7 +177,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import applicationRoutes from "./routes/applications.js";
 import JobApplication from "./models/JobApplication.js";
-import fs from "fs";
+
 import { protectCompany } from "./middlewares/authMiddleware.js";
 
 // 1️⃣ Initialize Express app first
@@ -207,10 +207,7 @@ app.use((req, res, next) => {
 // Sentry (after app exists)
 Sentry.setupExpressErrorHandler(app);
 
-// Ensure uploads folder exists
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
-app.use("/uploads", express.static(uploadDir));
+
 
 // 4️⃣ Routes
 app.get("/", (req, res) => res.send("API is working"));

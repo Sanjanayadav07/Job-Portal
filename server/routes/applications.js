@@ -1,20 +1,16 @@
 
 import express from "express";
 import multer from "multer";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+import { protectCompany } from "../middlewares/authMiddleware.js";
+
 
 const router = express.Router();
 
 // Setup storage for resumes
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // folder to store uploaded files
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // e.g., 123456789.pdf
-  }
-});
+const storage = multer.memoryStorage();
+
+
 
 const upload = multer({ storage });
 
@@ -38,16 +34,28 @@ router.get("/:id", requireAuth, async (req, res) => {
 });
 // POST /api/applications/apply => upload resume
 //router.post("/applications/apply", requireAuth, upload.single("resume"), (req, res) => {
- router.post("/apply", requireAuth, upload.single("resume"), (req, res) => { 
+router.post("/apply", upload.single("resume"), async (req, res) => {
   try {
-    const file = req.file;
-    if (!file) return res.status(400).json({ message: "No file uploaded" });
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
 
-    // Here, save the file info to DB if needed
-    console.log("Resume uploaded:", file.filename);
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "job-portal/resumes" },
+        (error, uploaded) => {
+          if (error) reject(error);
+          else resolve(uploaded);
+        }
+      );
+      stream.end(req.file.buffer);
+    });
 
-    res.json({ message: "Resume uploaded successfully", fileName: file.filename });
-  } catch (err) {
+    console.log("Resume uploaded to Cloudinary:", result.secure_url);
+
+    // Save result.secure_url in DB if needed
+
+    res.json({ message: "Resume uploaded successfully", url: result.secure_url });
+  } 
+  catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }

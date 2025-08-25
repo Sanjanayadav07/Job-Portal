@@ -20,26 +20,19 @@ import { requireAuth, clerkClient } from "@clerk/express"; // ✅ include clerkC
 import { getUserData, applyForJob, getUserJobApplications, updateUserResume, getUserDataById } from "../controllers/userController.js";
 import User from "../models/User.js";
 import multer from "multer";
-import fs from "fs";
-import path from "path";
+
 
 
 //import { applyForJob } from "../controllers/userController.js";
 
 const router = express.Router();
 
-// Ensure uploads folder exists
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
 
 // ----- Multer setup -----
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-});
+// Multer memory storage (no local files)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
 
 // ----- Routes -----
 //router.get("/:id", requireAuth(), getUserData);
